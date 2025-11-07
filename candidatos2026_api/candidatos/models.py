@@ -1,16 +1,30 @@
 from django.db import models
 
 class Candidato(models.Model):
-    TIPO_CHOICES = [
-        ('PRESIDENTE', 'Presidente'),
-        ('CONGRESISTA', 'Congresista'),
-        ('SENADOR', 'Senador'),
-    ]
     nombre = models.CharField(max_length=100)
+    apellidos = models.CharField(max_length=100)
+    cargo = models.CharField(max_length=100)
     partido = models.CharField(max_length=100)
-    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
-    biografia = models.TextField()
-    foto_url = models.URLField(blank=True, null=True)
+    region = models.CharField(max_length=100)
+    fotoUrl = models.URLField(blank=True, null=True)
+    biografia = models.TextField(blank=True, null=True)
+    fechaNacimiento = models.DateField(blank=True, null=True)
+    profesion = models.CharField(max_length=100, blank=True, null=True)
+    correo = models.EmailField(blank=True, null=True)
+    telefono = models.CharField(max_length=20, blank=True, null=True)
 
-    def __str__(self):
-        return f"{self.nombre} ({self.tipo})"
+class Proyecto(models.Model):
+    candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE, related_name="proyectos")
+    titulo = models.CharField(max_length=150)
+    descripcion = models.TextField()
+    fecha = models.DateField()
+    estado = models.CharField(max_length=50)
+    urlFuente = models.URLField()
+
+class Denuncia(models.Model):
+    candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE, related_name="denuncias")
+    tipo = models.CharField(max_length=50)
+    descripcion = models.TextField()
+    fecha = models.DateField()
+    estado = models.CharField(max_length=50)
+    urlFuente = models.URLField()
