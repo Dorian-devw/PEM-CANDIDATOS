@@ -2,7 +2,7 @@ from django.db import models
 
 class Candidato(models.Model):
     nombre = models.CharField(max_length=100)
-    apellidos = models.CharField(max_length=100)
+    apellidos = models.CharField(max_length=100, default='SinApellidos')
     cargo = models.CharField(max_length=100)
     partido = models.CharField(max_length=100)
     region = models.CharField(max_length=100)
