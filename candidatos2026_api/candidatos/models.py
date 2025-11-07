@@ -1,11 +1,10 @@
 from django.db import models
 
 class Candidato(models.Model):
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100, default='SinNombre')
     apellidos = models.CharField(max_length=100, default='SinApellidos')
-    cargo = models.CharField(max_length=100)
-    partido = models.CharField(max_length=100)
-    region = models.CharField(max_length=100)
+    partido = models.CharField(max_length=100, default='SinCargo')
+    region = models.CharField(max_length=100, default='SinRegion')
     fotoUrl = models.URLField(blank=True, null=True)
     biografia = models.TextField(blank=True, null=True)
     fechaNacimiento = models.DateField(blank=True, null=True)
